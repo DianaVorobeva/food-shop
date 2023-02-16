@@ -1,12 +1,18 @@
 import { useState } from 'react';
 import { dataSlides } from './dataSlides';
-import SlidesSeason from './SlidesSeason'
+import { data } from "./data";
+import SlidesSet from './SlidesSet';
+
 
 
 
 function Home() {
     const [slides, setSlides] = useState(0);
     const {image,title,sign} = dataSlides[slides];
+
+    const healthyGroup = data.filter(element => element.fitness === true);
+    const saleGroup = data.filter(element => element.sale === true);
+    const seasonGroup = data.filter(element => element.season === true);
 
     const previousSlide = () => {
       setSlides((slides => {
@@ -103,9 +109,21 @@ return(
       <img src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1227&q=80" alt="phone" className='phone'/>
     </div>
     </div>
-    <div>
-      <SlidesSeason/>
-    </div> 
+    
+    <div className="evenly">
+        <div className="block">
+            <h2 className="heading2">Season is now! <img src={"https://img.icons8.com/external-flaticons-flat-flat-icons/512/external-fruit-plants-flaticons-flat-flat-icons-2.png"} alt="arrow" width="40px"/></h2>
+            <SlidesSet group={seasonGroup}/>
+        </div> 
+        <div className="block">
+            <h2 className="heading2">Healthy lifestyle <img src={"https://img.icons8.com/3d-fluency/512/natural-food.png"} alt="arrow" width="40px"/></h2>
+            <SlidesSet group={healthyGroup}/>
+        </div>
+        <div className="block">
+            <h2 className="heading2">Tasty sales <img src={"https://img.icons8.com/3d-fluency/512/discount.png"} alt="arrow" width="40px" /></h2>
+            <SlidesSet group={saleGroup}/>
+         </div>
+    </div>
     </div>
 )
 }
